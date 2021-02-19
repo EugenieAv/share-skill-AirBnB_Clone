@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :author_services, class_name: 'Service', foreign_key: "author_id"
+  has_many :consumer_services, class_name: 'Service', foreign_key: "consumer_id"
+
   validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
   has_one_attached :photo
