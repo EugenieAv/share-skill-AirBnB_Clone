@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :author_services, class_name: 'Service', foreign_key: "author_id"
-  has_many :consumer_services, class_name: 'Service', foreign_key: "consumer_id"
+  # has_many :author_services, class_name: 'Service', foreign_key: "author_id"g
+  # has_many :consumer_services, class_name: 'Service', foreign_key: "consumer_id"
+  has_many :professional_offers, class_name: 'Offer', foreign_key: "professional_id"
 
   has_many :reviews_for_my_service, class_name: 'Review', through: :services
   has_many :reviews_write_by_consumer, class_name: 'Review', through: :services
