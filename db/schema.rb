@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_131113) do
+ActiveRecord::Schema.define(version: 2021_02_24_095524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,10 +36,36 @@ ActiveRecord::Schema.define(version: 2021_02_19_131113) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.string "status"
+    t.bigint "offer_id", null: false
+    t.bigint "professional_id", null: false
+    t.bigint "consumer_id", null: false
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["consumer_id"], name: "index_bookings_on_consumer_id"
+    t.index ["offer_id"], name: "index_bookings_on_offer_id"
+    t.index ["professional_id"], name: "index_bookings_on_professional_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "localization"
+    t.bigint "professional_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_offers_on_category_id"
+    t.index ["professional_id"], name: "index_offers_on_professional_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -85,6 +111,11 @@ ActiveRecord::Schema.define(version: 2021_02_19_131113) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "offers"
+  add_foreign_key "bookings", "users", column: "consumer_id"
+  add_foreign_key "bookings", "users", column: "professional_id"
+  add_foreign_key "offers", "categories"
+  add_foreign_key "offers", "users", column: "professional_id"
   add_foreign_key "reviews", "services"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "users", column: "author_id"
