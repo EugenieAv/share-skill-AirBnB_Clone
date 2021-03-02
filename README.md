@@ -10,6 +10,8 @@ Etapes de conception et usefulltips
 3 - Mise en place des modèles  
 ![Schéma de la DB](/images/schema-db.png?raw=true "Schéma de DB")
 
+`![schema-db](https://user-images.githubusercontent.com/59569740/109703121-66cd3480-7b95-11eb-81aa-19cbd48736a8.png)`
+
 4 - Pour le modèle booking
   Ici première subtilité avec 2 instances de User qui sont referencées comme clefs etrangères.
   Suivre le tuto https://dev.to/luchiago/multiple-foreign-keys-for-the-same-model-in-rails-6-7ml pour se faire ;-)
@@ -21,6 +23,7 @@ Etapes de conception et usefulltips
   . pour autoriser à render la show  de dashboardqui ne depend d'aucun modèle
   
   `
+  
      class DashboardPolicy < Struct.new(:user, :dashboard)
         # ...
       end
@@ -32,4 +35,6 @@ Etapes de conception et usefulltips
       <% if policy(:dashboard).show? %>
         <%= link_to 'Dashboard', dashboard_path %>
       <% end %>
-     `
+      
+  
+ `
