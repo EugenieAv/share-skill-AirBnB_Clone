@@ -109,7 +109,9 @@ ActiveRecord::Schema.define(version: 2021_02_24_194821) do
   add_foreign_key "bookings", "users", column: "professional_id"
   add_foreign_key "offers", "categories"
   add_foreign_key "offers", "users", column: "professional_id"
+
   add_foreign_key "professional_categories", "categories"
   add_foreign_key "professional_categories", "users", column: "professional_id"
   add_foreign_key "reviews", "bookings"
+
 end
