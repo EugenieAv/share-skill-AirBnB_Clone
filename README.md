@@ -14,3 +14,21 @@ Etapes de conception et usefulltips
   Ici première subtilité avec 2 instances de User qui sont referencées comme clefs etrangères.
   Suivre le tuto https://dev.to/luchiago/multiple-foreign-keys-for-the-same-model-in-rails-6-7ml pour se faire ;-)
   
+5 - Creation du controlleur Dashboard 
+    Route : `resourcE Dashboard, only: :show`
+
+6 - Installation de Pundit
+  . pour autoriser à render la show  de dashboardqui ne depend d'aucun modèle
+    `class DashboardPolicy < Struct.new(:user, :dashboard)
+      # ...
+    end`
+    
+    `# In controllers
+     authorize :dashboard, :show?`
+     
+     `
+     # In views
+      <% if policy(:dashboard).show? %>
+        <%= link_to 'Dashboard', dashboard_path %>
+      <% end %>
+     `
