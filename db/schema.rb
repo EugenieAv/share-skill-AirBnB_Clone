@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_095524) do
+ActiveRecord::Schema.define(version: 2021_02_24_194821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,29 +68,22 @@ ActiveRecord::Schema.define(version: 2021_02_24_095524) do
     t.index ["professional_id"], name: "index_offers_on_professional_id"
   end
 
+  create_table "professional_categories", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "professional_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_professional_categories_on_category_id"
+    t.index ["professional_id"], name: "index_professional_categories_on_professional_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "rating"
-    t.bigint "service_id", null: false
+    t.bigint "booking_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["service_id"], name: "index_reviews_on_service_id"
-  end
-
-  create_table "services", force: :cascade do |t|
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.string "localization"
-    t.bigint "author_id", null: false
-    t.bigint "consumer_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "title"
-    t.text "description"
-    t.bigint "category_id", null: false
-    t.index ["author_id"], name: "index_services_on_author_id"
-    t.index ["category_id"], name: "index_services_on_category_id"
-    t.index ["consumer_id"], name: "index_services_on_consumer_id"
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,8 +109,7 @@ ActiveRecord::Schema.define(version: 2021_02_24_095524) do
   add_foreign_key "bookings", "users", column: "professional_id"
   add_foreign_key "offers", "categories"
   add_foreign_key "offers", "users", column: "professional_id"
-  add_foreign_key "reviews", "services"
-  add_foreign_key "services", "categories"
-  add_foreign_key "services", "users", column: "author_id"
-  add_foreign_key "services", "users", column: "consumer_id"
+  add_foreign_key "professional_categories", "categories"
+  add_foreign_key "professional_categories", "users", column: "professional_id"
+  add_foreign_key "reviews", "bookings"
 end
