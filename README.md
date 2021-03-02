@@ -20,14 +20,14 @@ Etapes de conception et usefulltips
 6 - Installation de Pundit
   . pour autoriser à render la show  de dashboardqui ne depend d'aucun modèle
   
-    `class DashboardPolicy < Struct.new(:user, :dashboard)
-      # ...
-    end`
+  `
+     class DashboardPolicy < Struct.new(:user, :dashboard)
+        # ...
+      end
     
-    `# In controllers
-     authorize :dashboard, :show?`
+     # In controllers
+     authorize :dashboard, :show?
      
-     `
      # In views
       <% if policy(:dashboard).show? %>
         <%= link_to 'Dashboard', dashboard_path %>
