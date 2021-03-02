@@ -8,7 +8,8 @@ Etapes de conception et usefulltips
 2 - installation de cloundinary -> cf lectures du wagon
 
 3 - Mise en place des modèles  
-![Alt text](/schema-db.png?raw=true "Schéma de DB")
+![Alt text](/images/schema-db.png?raw=true "Schéma de DB")
+
 4 - Pour le modèle booking
   Ici première subtilité avec 2 instances de User qui sont referencées comme clefs etrangères.
   Suivre le tuto https://dev.to/luchiago/multiple-foreign-keys-for-the-same-model-in-rails-6-7ml pour se faire ;-)
