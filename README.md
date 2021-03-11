@@ -38,3 +38,5 @@ Etapes de conception et usefulltips
       
   
  `
+ 
+  Finalement, on ne va utiliser cette méthode - à savoir autorise une controlleur, et ne pasautoriser des DONNEES. qui est plus le but de pundit
