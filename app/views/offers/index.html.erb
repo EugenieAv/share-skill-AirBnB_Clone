@@ -1,0 +1,22 @@
+<h1>Toutes les offres</h1>
+
+<% @categories.each do |category| %>
+  <div>
+    <%= category.name %>
+  </div>
+<% end %>
+
+
+
+<% @categories.each do |category| %>
+  <div>
+    <ul>
+      <% Offer.where(category_id: category.id).each do |item| %>
+        <%= link_to offer_path(item)  do %>
+          <li><%= item.title %></li>
+        <% end %>
+      <% end %>
+
+    </ul>
+  </div>
+<% end %>
